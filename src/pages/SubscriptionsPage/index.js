@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../../Providers/Auth';
 import { Container, LogoPLan, LogoPrice, PlansWrapper, Title } from './styles';
 
@@ -33,8 +34,10 @@ function SubscriptionsPage() {
 
             {plansInfos.map((info) => (
                 <PlansWrapper key={info.id}>
-                    <LogoPLan><img src={info.image} alt="logo-plan" /></LogoPLan>
-                    <LogoPrice> R$ {info.price} </LogoPrice>
+                    <Link to={`/subscriptions/${info.id}`}>
+                        <LogoPLan><img src={info.image} alt="logo-plan" /></LogoPLan>
+                        <LogoPrice> R$ {info.price} </LogoPrice>
+                    </Link>
                 </PlansWrapper>
             ))}
 
