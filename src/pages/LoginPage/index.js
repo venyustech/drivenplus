@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 // import Loader from "react-loader-spinner";
 
 import logo from '../../assets/drivenLogo.png'
@@ -12,7 +12,7 @@ function LoginPage() {
     const { setUserToken, setUserInfos } = useContext(UserContext);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
     const [inputLoading, setInputLoading] = useState("");
@@ -34,8 +34,12 @@ function LoginPage() {
             setUserInfos(response.data)
             setIsLoading(false);
             setInputLoading("");
-            console.log("deu bom")
-            // navigate('/hoje');
+            if (response.data.membership === null) {
+                navigate('/subscriptions');
+            }
+            else {
+                navigate('/home')
+            }
 
         })
         promise.catch((error) => {
@@ -43,7 +47,6 @@ function LoginPage() {
             alert("Tenta de novo. Dados incorretos");
             setIsLoading(false)
             setInputLoading("")
-            console.log("deu ruim")
         })
     }
     return (

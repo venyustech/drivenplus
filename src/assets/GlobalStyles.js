@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
 :root{
     --main-color: #000;
     --botton-color: #FF4791;
-    --font-family: 'Lexend Deca', sans-serif;
+    --font-family: 'Roboto', sans-serif;
     --font-color: #fff;
 
 }
