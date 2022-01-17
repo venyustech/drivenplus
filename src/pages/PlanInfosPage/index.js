@@ -41,8 +41,6 @@ function PlanInfosPage() {
             setPlanDetails(response.data.perks)
             setPlanInfo(response.data);
             setMenberShipID(response.data.id)
-            console.log("membeshipID: ", response.data.id)
-
         });
         promise.catch(error => console.log("erro#1-PlansPage: ", error.response));
 
@@ -77,8 +75,7 @@ function PlanInfosPage() {
             navigate('/home');
 
         })
-        promise.catch(error => alert("deu ruim! tenta de novo."))
-
+        promise.catch(error => alert("cartão inválido! tenta de novo."))
     }
 
     if (planInfo === null) {
@@ -166,12 +163,10 @@ function PlanInfosPage() {
                                     />
                                 </ValidationInfos>
                                 <Button>{isLoading ?
-                                    ("loading...") : ("entrar")}
+                                    ("loading...") : ("ASSINAR")}
                                 </Button>
                             </form>
                         </FormWrapper>
-
-
                     </InfosPlanBox>
                 </PlanInfosWrapper>
             </FormsContainer>

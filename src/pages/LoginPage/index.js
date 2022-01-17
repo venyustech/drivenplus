@@ -41,7 +41,6 @@ function LoginPage() {
                 setMenberShipID(response.data.membership.id)
                 setUserPlanImage(response.data.membership.image)
                 setUserPlanPerks(response.data.membership.perks)
-                console.log("membeshipID: ", response.data.id)
                 navigate('/home')
             }
 

@@ -10,13 +10,7 @@ function HomePage() {
     const { userToken, memberShipID, userPlanImage, userPlanPerks, userName } = useContext(UserContext);
     const navigate = useNavigate();
 
-
-    console.log("MemberID", memberShipID)
-    console.log("image", userPlanImage)
-    console.log("perks", userPlanPerks)
-
     function changePlan() {
-        console.log("mudar")
         navigate('/subscriptions');
     }
     function cancelPlan() {
@@ -29,7 +23,6 @@ function HomePage() {
             }
         );
         promise.then((response) => {
-            console.log("removeu", response.data)
             navigate('/');
         });
 
@@ -37,7 +30,6 @@ function HomePage() {
             alert("Algo deu errado, tente novamente mais tarde");
             console.log(error.response);
         });
-
     }
 
     return (
@@ -56,7 +48,6 @@ function HomePage() {
                     </PlanBenefitsCard>
                 ))}
             </PlanBenefitsBox>
-
             <Footer>
                 <ChangePlan onClick={() => changePlan()}>Mudar Plano</ChangePlan>
                 <CancelPlan onClick={() => cancelPlan()}>Cancelar Plano</CancelPlan>
