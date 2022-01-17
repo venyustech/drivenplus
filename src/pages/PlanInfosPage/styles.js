@@ -163,8 +163,58 @@ const Button = styled.button`
 const LinkStyled = styled(Link)`
     color: #FFFFFF;
 `;
+const ConfirmBox = styled.div`
+  
+`
+const ConfirmCard = styled.div`
+    position: absolute; 
+    width: 248px;
+    height: 210px;
+    left: 64px;
+    top: 229px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    p{
+        margin: 8px 0;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        color:#000;
+    }
+    button{
+        width: 95px;
+        p{
+            color: #FFFFFF;
+        }
+    }
+`
+const Cancel = styled.button`
+    height: 52px;
+    width: 100%;
+    color: #FFFFFF;
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 21px;
+    line-height: 26px;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #CECECE;
+
+`
+const CheckAnswer = styled.div`
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-evenly;
+`
 export {
     Container, ComeBackIcon, PlanInfosWrapper, LogoImg, LogoTitle, InfosPlanBox,
     PlanBenefitsWrapper, PlanPriceTitleWrapper, PlanPriceWrapper, FormWrapper,
-    PlanBenefitsTitle, Input, ValidationInfos, Button, LinkStyled
-};
+    PlanBenefitsTitle, Input, ValidationInfos, Button, LinkStyled, ConfirmBox,
+    ConfirmCard, CheckAnswer, Cancel
+}
