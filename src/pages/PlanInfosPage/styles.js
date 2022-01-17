@@ -165,6 +165,16 @@ const LinkStyled = styled(Link)`
 `;
 const ConfirmBox = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
+     svg{
+        position: absolute;
+        z-index: 2;
+        right: 10%;
+        top: 5%;
+        bottom: 6.25%;
+        height: 28px;
+        width: 28px;
+        cursor: pointer;
+    }
 `
 const FormsContainer = styled.div`
     opacity: ${(props) => props.isLoading ? "0.5" : "1.0"};
@@ -194,6 +204,7 @@ const ConfirmCard = styled.div`
             color: #FFFFFF;
         }
     }
+   
 `
 const Cancel = styled.button`
     height: 52px;

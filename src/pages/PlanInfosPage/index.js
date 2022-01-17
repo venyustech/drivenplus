@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { HiOutlineClipboardList } from 'react-icons/hi'
-import { FaMoneyBillWave } from 'react-icons/fa'
+import { FaMoneyBillWave, FaWindowClose } from 'react-icons/fa'
 
 import { Button, Cancel, CheckAnswer, ComeBackIcon, ConfirmBox, ConfirmCard, Container, FormsContainer, FormWrapper, InfosPlanBox, Input, LinkStyled, LogoImg, LogoTitle, PlanBenefitsTitle, PlanBenefitsWrapper, PlanInfosWrapper, PlanPriceTitleWrapper, PlanPriceWrapper, ValidationInfos } from './styles';
 import UserContext from '../../Providers/Auth';
@@ -86,7 +86,12 @@ function PlanInfosPage() {
             {isLoading ?
                 (
                     <ConfirmBox>
+                        <FaWindowClose onClick={() => {
+                            setIsLoading(false)
+                            setInputLoading("")
+                        }} />
                         <ConfirmCard>
+
                             <p>
                                 Tem certeza que deseja assinar o plano {planInfo.name} (R${planInfo.price})?
                             </p>
