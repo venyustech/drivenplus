@@ -16,7 +16,6 @@ function PlanInfosPage() {
 
     const navigate = useNavigate();
 
-
     const [planInfo, setPlanInfo] = useState(null);
     const [planDetails, setPlanDetails] = useState(null);
 
@@ -142,14 +141,12 @@ function PlanInfosPage() {
                                     value={creditCardName}
                                     placeholder="Nome impresso no cartão"
                                     disabled={inputLoading}
-
                                 />
                                 <Input type="text"
                                     onChange={(e) => setCreditCardDigits(e.target.value)}
                                     value={creditCardDigits}
                                     placeholder="Digitos do cartão"
                                     disabled={inputLoading}
-
                                 />
                                 <ValidationInfos>
                                     <Input type="text"
@@ -157,14 +154,12 @@ function PlanInfosPage() {
                                         value={securityCode}
                                         placeholder="Código de segurança"
                                         disabled={inputLoading}
-
                                     />
                                     <Input type="text"
                                         onChange={(e) => setCreditCardValidity(e.target.value)}
                                         value={creditCardValidity}
                                         placeholder="Validade"
                                         disabled={inputLoading}
-
                                     />
                                 </ValidationInfos>
                                 <Button>{isLoading ?

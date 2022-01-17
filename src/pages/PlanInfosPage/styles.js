@@ -151,7 +151,6 @@ const Button = styled.button`
     line-height: 26px;
     text-align: center;
     padding: 14px;
-    /* ${(props) => !props.noMargin && "margin-bottom: 10px;"} */
     border-radius: 8px;
     border: none;
     display: flex;
@@ -179,7 +178,6 @@ const ConfirmBox = styled.div`
 const FormsContainer = styled.div`
     opacity: ${(props) => props.isLoading ? "0.5" : "1.0"};
 `
-
 
 const ConfirmCard = styled.div`
     position: absolute; 

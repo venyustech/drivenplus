@@ -18,12 +18,9 @@ export default function App() {
     const [userPlanImage, setUserPlanImage] = useState("");
     const [userPlanPerks, setUserPlanPerks] = useState([]);
 
-
-
     return (
         <>
             <UserContext.Provider value={{ userToken, setUserToken, userInfos, setUserInfos, memberShipID, setMenberShipID, userPlanImage, setUserPlanImage, userPlanPerks, setUserPlanPerks, userName, setUserName }}>
-
                 <BrowserRouter>
                     <GlobalStyles />
                     <Routes>
@@ -32,7 +29,6 @@ export default function App() {
                         <Route path="/subscriptions" element={<SubscriptionsPage />} />
                         <Route path="/subscriptions/:planId" element={<PlanInfosPage />} />
                         <Route path="/home" element={<HomePage />} />
-
                     </Routes>
                 </BrowserRouter>
             </UserContext.Provider>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-// import Loader from "react-loader-spinner";
 
 import logo from '../../assets/drivenLogo.png'
 import UserContext from '../../Providers/Auth';

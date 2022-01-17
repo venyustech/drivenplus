@@ -53,8 +53,6 @@ function HomePage() {
                 <CancelPlan onClick={() => cancelPlan()}>Cancelar Plano</CancelPlan>
             </Footer>
         </Container>
-
-
     )
 }
 
