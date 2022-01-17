@@ -12,11 +12,17 @@ import PlanInfosPage from "./pages/PlanInfosPage";
 
 export default function App() {
     const [userToken, setUserToken] = useState(null);
+    const [userName, setUserName] = useState(null);
     const [userInfos, setUserInfos] = useState('');
+    const [memberShipID, setMenberShipID] = useState("");
+    const [userPlanImage, setUserPlanImage] = useState("");
+    const [userPlanPerks, setUserPlanPerks] = useState([]);
+
+
 
     return (
         <>
-            <UserContext.Provider value={{ userToken, setUserToken, userInfos, setUserInfos }}>
+            <UserContext.Provider value={{ userToken, setUserToken, userInfos, setUserInfos, memberShipID, setMenberShipID, userPlanImage, setUserPlanImage, userPlanPerks, setUserPlanPerks, userName, setUserName }}>
 
                 <BrowserRouter>
                     <GlobalStyles />

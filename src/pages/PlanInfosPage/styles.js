@@ -164,8 +164,13 @@ const LinkStyled = styled(Link)`
     color: #FFFFFF;
 `;
 const ConfirmBox = styled.div`
-  
+    background-color: rgba(0, 0, 0, 0.7);
 `
+const FormsContainer = styled.div`
+    opacity: ${(props) => props.isLoading ? "0.5" : "1.0"};
+`
+
+
 const ConfirmCard = styled.div`
     position: absolute; 
     width: 248px;
@@ -174,6 +179,7 @@ const ConfirmCard = styled.div`
     top: 229px;
     background: #FFFFFF;
     border-radius: 12px;
+    z-index: 2;
     p{
         margin: 8px 0;
         font-weight: bold;
@@ -212,9 +218,11 @@ const CheckAnswer = styled.div`
     margin-top: 40px;
     justify-content: space-evenly;
 `
+
+
 export {
     Container, ComeBackIcon, PlanInfosWrapper, LogoImg, LogoTitle, InfosPlanBox,
     PlanBenefitsWrapper, PlanPriceTitleWrapper, PlanPriceWrapper, FormWrapper,
     PlanBenefitsTitle, Input, ValidationInfos, Button, LinkStyled, ConfirmBox,
-    ConfirmCard, CheckAnswer, Cancel
+    ConfirmCard, CheckAnswer, Cancel, FormsContainer
 }

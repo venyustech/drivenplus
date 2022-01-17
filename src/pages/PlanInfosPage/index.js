@@ -4,15 +4,16 @@ import { IoMdArrowRoundBack } from 'react-icons/io'
 import { HiOutlineClipboardList } from 'react-icons/hi'
 import { FaMoneyBillWave } from 'react-icons/fa'
 
-
-
-import { Button, Cancel, CheckAnswer, ComeBackIcon, ConfirmBox, ConfirmCard, Container, FormWrapper, InfosPlanBox, Input, LinkStyled, LogoImg, LogoTitle, PlanBenefitsTitle, PlanBenefitsWrapper, PlanInfosWrapper, PlanPriceTitleWrapper, PlanPriceWrapper, ValidationInfos } from './styles';
+import { Button, Cancel, CheckAnswer, ComeBackIcon, ConfirmBox, ConfirmCard, Container, FormsContainer, FormWrapper, InfosPlanBox, Input, LinkStyled, LogoImg, LogoTitle, PlanBenefitsTitle, PlanBenefitsWrapper, PlanInfosWrapper, PlanPriceTitleWrapper, PlanPriceWrapper, ValidationInfos } from './styles';
 import UserContext from '../../Providers/Auth';
 import axios from 'axios';
 
 function PlanInfosPage() {
     const { planId } = useParams();
-    const { userToken } = useContext(UserContext);
+    const {
+        userToken, memberShipID, setMenberShipID, setUserPlanImage, setUserPlanPerks
+    } = useContext(UserContext);
+
     const navigate = useNavigate();
 
 
@@ -26,7 +27,6 @@ function PlanInfosPage() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [inputLoading, setInputLoading] = useState("");
-    const [memberShip, setMenberShip] = useState("");
 
 
 
@@ -40,26 +40,25 @@ function PlanInfosPage() {
         promise.then(response => {
             setPlanDetails(response.data.perks)
             setPlanInfo(response.data);
-            setMenberShip(response.data.id)
+            setMenberShipID(response.data.id)
+            console.log("membeshipID: ", response.data.id)
+
         });
         promise.catch(error => console.log("erro#1-PlansPage: ", error.response));
 
     }, [])
-
-
 
     function confirmSubscription(e) {
         e.preventDefault();
         setIsLoading(true);
         setInputLoading("disabled")
     }
-
     function handleNewPlan() {
         setIsLoading(false);
         setInputLoading("");
 
         const promise = axios.post('https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions', {
-            membershipId: memberShip,
+            membershipId: memberShipID,
             cardName: creditCardName,
             cardNumber: creditCardDigits,
             securityNumber: securityCode,
@@ -73,7 +72,8 @@ function PlanInfosPage() {
             }
         );
         promise.then(response => {
-            console.log("novo plano:", response.data)
+            setUserPlanImage(response.data.membership.image)
+            setUserPlanPerks(response.data.membership.perks)
             navigate('/home');
 
         })
@@ -82,7 +82,6 @@ function PlanInfosPage() {
     }
 
     if (planInfo === null) {
-
         return <h1>loading...</h1>
     }
     return (
@@ -91,7 +90,9 @@ function PlanInfosPage() {
                 (
                     <ConfirmBox>
                         <ConfirmCard>
-                            <p>Tem certeza que deseja assinar o plano {planInfo.name} (R${planInfo.price})?</p>
+                            <p>
+                                Tem certeza que deseja assinar o plano {planInfo.name} (R${planInfo.price})?
+                            </p>
                             <CheckAnswer>
                                 <Cancel onClick={() => {
                                     setIsLoading(false)
@@ -104,75 +105,76 @@ function PlanInfosPage() {
                     </ConfirmBox>
 
                 ) : ("")}
+            <FormsContainer isLoading={isLoading}>
+                <LinkStyled to={`/subscriptions`}>
+                    <ComeBackIcon><IoMdArrowRoundBack /></ComeBackIcon>
+                </LinkStyled>
 
-            <LinkStyled to={`/subscriptions`}>
-                <ComeBackIcon><IoMdArrowRoundBack /></ComeBackIcon>
-            </LinkStyled>
+                <PlanInfosWrapper>
+                    <LogoImg src={planInfo.image} alt="logo-img" />
+                    <LogoTitle> {planInfo.name} </LogoTitle>
+                    <InfosPlanBox>
 
-            <PlanInfosWrapper>
-                <LogoImg src={planInfo.image} alt="logo-img" />
-                <LogoTitle> {planInfo.name} </LogoTitle>
-                <InfosPlanBox>
+                        <PlanBenefitsWrapper>
+                            <PlanBenefitsTitle>
+                                <HiOutlineClipboardList />
+                                <p>Benefícios:</p>
+                            </PlanBenefitsTitle>
+                            {planDetails.map((info, index) => (
+                                <p key={info.id}> {index + 1}. {info.title}</p>
+                            ))}
+                        </PlanBenefitsWrapper>
 
-                    <PlanBenefitsWrapper>
-                        <PlanBenefitsTitle>
-                            <HiOutlineClipboardList />
-                            <p>Benefícios:</p>
-                        </PlanBenefitsTitle>
-                        {planDetails.map((info, index) => (
-                            <p key={info.id}> {index + 1}. {info.title}</p>
-                        ))}
-                    </PlanBenefitsWrapper>
+                        <PlanPriceWrapper>
+                            <PlanPriceTitleWrapper>
+                                <FaMoneyBillWave />
+                                <p>Preço:</p>
+                            </PlanPriceTitleWrapper>
+                            <p>R$ {planInfo.price} cobrados mensalmente</p>
+                        </PlanPriceWrapper>
 
-                    <PlanPriceWrapper>
-                        <PlanPriceTitleWrapper>
-                            <FaMoneyBillWave />
-                            <p>Preço:</p>
-                        </PlanPriceTitleWrapper>
-                        <p>R$ {planInfo.price} cobrados mensalmente</p>
-                    </PlanPriceWrapper>
-
-                    <FormWrapper>
-                        <form onSubmit={confirmSubscription}>
-                            <Input type="text"
-                                onChange={(e) => setCreditCardName(e.target.value)}
-                                value={creditCardName}
-                                placeholder="Nome impresso no cartão"
-                                disabled={inputLoading}
-
-                            />
-                            <Input type="text"
-                                onChange={(e) => setCreditCardDigits(e.target.value)}
-                                value={creditCardDigits}
-                                placeholder="Digitos do cartão"
-                                disabled={inputLoading}
-
-                            />
-                            <ValidationInfos>
+                        <FormWrapper>
+                            <form onSubmit={confirmSubscription}>
                                 <Input type="text"
-                                    onChange={(e) => setSecurityCode(e.target.value)}
-                                    value={securityCode}
-                                    placeholder="Código de segurança"
+                                    onChange={(e) => setCreditCardName(e.target.value)}
+                                    value={creditCardName}
+                                    placeholder="Nome impresso no cartão"
                                     disabled={inputLoading}
 
                                 />
                                 <Input type="text"
-                                    onChange={(e) => setCreditCardValidity(e.target.value)}
-                                    value={creditCardValidity}
-                                    placeholder="Validade"
+                                    onChange={(e) => setCreditCardDigits(e.target.value)}
+                                    value={creditCardDigits}
+                                    placeholder="Digitos do cartão"
                                     disabled={inputLoading}
 
                                 />
-                            </ValidationInfos>
-                            <Button>{isLoading ?
-                                ("loading...") : ("entrar")}
-                            </Button>
-                        </form>
-                    </FormWrapper>
+                                <ValidationInfos>
+                                    <Input type="text"
+                                        onChange={(e) => setSecurityCode(e.target.value)}
+                                        value={securityCode}
+                                        placeholder="Código de segurança"
+                                        disabled={inputLoading}
+
+                                    />
+                                    <Input type="text"
+                                        onChange={(e) => setCreditCardValidity(e.target.value)}
+                                        value={creditCardValidity}
+                                        placeholder="Validade"
+                                        disabled={inputLoading}
+
+                                    />
+                                </ValidationInfos>
+                                <Button>{isLoading ?
+                                    ("loading...") : ("entrar")}
+                                </Button>
+                            </form>
+                        </FormWrapper>
 
 
-                </InfosPlanBox>
-            </PlanInfosWrapper>
+                    </InfosPlanBox>
+                </PlanInfosWrapper>
+            </FormsContainer>
         </Container>
     );
 
