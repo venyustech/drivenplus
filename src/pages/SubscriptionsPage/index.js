@@ -18,7 +18,6 @@ function SubscriptionsPage() {
         });
         promise.then(response => {
             setPlansInfos(response.data);
-            console.log("deu bom", response.data);
         });
         promise.catch(error => console.log("erro#1-PlansPage: ", error.response));
 
